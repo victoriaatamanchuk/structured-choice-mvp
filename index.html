@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вибір квартири</title>
+</head>
+
+<body>
+<!-- ================================= -->
+<!-- SCREEN 0 : НАЗВА -->
+<!-- ================================= -->
+<div id="screen0" style="text-align:center; padding-top:60px;">
+
+    <div style="
+        background:#F7FCFE;
+        border-radius:24px;
+        padding:75px 55px;
+        width:880px;
+        margin:0 auto;
+        box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        text-align:center;
+    ">
+
+        <h1 style="
+            font-size:44px;
+            margin:0 0 32px 0;
+            color:#111827;
+        ">
+            Механізм структурованого вибору
+        </h1>
+
+        <p style="
+            font-size:22px;
+            line-height:1.45;
+            margin:0 auto 55px auto;
+            color:#5E6E75;
+            max-width:760px;
+        ">
+            Прототип механізму підтримки процесу прийняття рішень.
+        </p>
+
+        <button onclick="goToScreen1()" style="
+            background:#39DEEA;
+            border:none;
+            border-radius:12px;
+            padding:16px 55px;
+            font-size:22px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            Почати
+        </button>
+
+    </div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 1 : ВАРІАНТИ -->
+<!-- ================================= -->
+    <div id="screen1" style="display:none;">
+    <h1 style="text-align:center;">
+Оберіть варіант, який вам зараз найбільше подобається
+</h1>
+    <div style="display:flex;">
+<div class="card" onclick="selectCard(this,'A')" style="border: 2px solid gray; border-radius: 15px; background-color:#F8F5EE; padding: 15px; margin: 15px; width:30%;">
+<h2> Варіант А</h2>
+
+<p><b>Ціна:</b> 11 000 грн</p>
+<p><b>Район:</b> Голосіївський</p>
+<p><b>Площа:</b> 25 м²</p>
+<p><b>Поверх:</b> 1 з 16</p>
+<p><b>Ремонт:</b> сучасний</p>
+<p><b>Будинок:</b> 2010-х років</p>
+<p><b>Локація:</b> 15 хв транспортом до метро</p>
+<p><b>Особливість:</b> окрема кухня і ванна</p>
+<p><b>Інфраструктура:</b> магазини, аптека, парк, транспорт</p>
+</div>
+    
+        <div class="card" onclick="selectCard(this,'B')" style="border: 2px solid gray; border-radius: 15px; background-color:#F2F5F8; padding: 15px; margin: 15px; width:30%;">
+<h2>Варіант B</h2>
+
+<p><b>Ціна:</b> 11 000 грн</p>
+
+<p><b>Район:</b> Голосіївський</p>
+
+<p><b>Площа:</b> 35 м²</p>
+
+<p><b>Поверх:</b> 1 з 3</p>
+
+<p><b>Ремонт:</b> простий</p>
+
+<p><b>Будинок:</b> 2020-х років</p>
+
+<p><b>Локація:</b> 10 хв транспортом до метро</p>
+
+<p><b>Особливість:</b> автономність (електрика, інтернет)</p>
+
+<p><b>Інфраструктура:</b> магазини, лікарня, банк, ТРЦ</p>
+</div>
+    
+       <div class="card" onclick="selectCard(this,'C')" style="border: 2px solid gray; border-radius: 15px; background-color:#F6F2FA; padding: 15px; margin: 15px; width:30%;">
+<h2>Варіант C</h2>
+
+<p><b>Ціна:</b> 13 000 грн</p>
+
+<p><b>Район:</b> Голосіївський</p>
+
+<p><b>Площа:</b> 39 м²</p>
+
+<p><b>Поверх:</b> 3 з 9</p>
+
+<p><b>Ремонт:</b> новий</p>
+
+<p><b>Будинок:</b> 2000-х років</p>
+
+<p><b>Локація:</b> 20 хв пішки до метро, транспорт нерегулярний</p>
+
+<p><b>Особливість:</b> світла квартира, є балкон</p>
+
+<p><b>Інфраструктура:</b> магазин, аптека, парк, кафе, фітнес-центр, басейн</p>
+</div>
+</div>
+
+    <br>
+
+    <div style="text-align:center;">
+    <button onclick="goNext()" style="
+        background-color:#39DEEA;
+        border:none;
+        border-radius:12px;
+        padding:15px 40px;
+        font-size:20px;
+        font-weight:bold;
+        cursor:pointer;
+    ">
+        Далі
+    </button>
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 2 : ВИБІР -->
+<!-- ================================= -->
+
+<div id="screen2" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:42px;">Інтуїтивний вибір</h1>
+
+<p style="font-size:22px;">Ваш вибір:</p>
+
+<div id="chosenCard" style="
+    border: 2px solid #D0D7E2;
+    border-radius: 22px;
+    padding: 15px 25px;
+    margin: 15px auto 30px auto;
+    width: 650px;
+    background-color:#F2F5F8;
+    text-align:left;
+">
+</div>
+
+<p style="font-size:22px;">
+Поясніть коротко, чому ви обрали саме цей варіант:
+</p>
+
+<textarea 
+    id="intuitiveChoiceComment"
+    rows="5"
+    placeholder="Напишіть тут..."
+    style="
+    width: 760px;
+    max-width: 90%;
+    border: 2px solid #D0D7E2;
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 18px;
+"></textarea>
+
+<div style="margin-top:35px;">
+    <button onclick="goBack()" style="
+        background-color:white;
+        border:2px solid #39DEEA;
+        border-radius:12px;
+        padding:15px 45px;
+        font-size:22px;
+        cursor:pointer;
+        margin-right:40px;
+    ">
+        ← Назад
+    </button>
+
+    <button onclick="goToScreen3()" style="
+    background-color:#39DEEA;
+    border:none;
+    border-radius:12px;
+    padding:15px 55px;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+">
+    Далі →
+</button>
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 3 : КРИТЕРІЇ -->
+<!-- ================================= -->
+<div id="screen3" style="display:none; text-align:center; padding-top:5px;">
+
+<h1 style="font-size:36px; margin-bottom:15px;">Критерії вибору</h1>
+
+<div style="
+    background:#F8FCFD;
+    border:1px solid #D9EEF0;
+    border-radius:20px;
+    padding:12px 22px;
+    width:820px;
+    margin:0 auto 18px auto;
+    font-size:18px;
+    line-height:1.3;
+">
+    <p style="margin:0 0 10px 0;">
+        Оцініть важливість кожного критерію від 1 до 5.
+    </p>
+
+    <p style="margin:0 0 10px 0;">
+        1 — майже не важливо, 5 — критично важливо.
+    </p>
+
+    <p style="margin:0;">
+        Для більш точного результату намагайтеся використовувати всю шкалу оцінок.
+    </p>
+</div>
+
+<div style="
+    background:white;
+    border-radius:22px;
+    padding:18px 28px;
+    width:860px;
+    margin:0 auto;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+">
+
+<table style="
+    margin:auto;
+    border-spacing:12px 8px;
+">
+
+<tr>
+<th style="font-size:18px;">Критерій</th>
+<th style="font-size:18px;">Вага</th>
+<th style="font-size:18px;">Пояснення</th>
+</tr>
+
+<tr>
+<td style="font-size:24px; font-weight:600; text-align:left;">Ціна</td>
+<td>
+<select id="priceWeight" style="width:100px; padding:9px; font-size:18px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</td>
+<td>
+<input id="priceReason" type="text" placeholder="Чому ви поставили таку оцінку?" style="width:430px; padding:12px; font-size:16px; border-radius:10px; border:1px solid #D0D7E2;">
+</td>
+</tr>
+
+<tr>
+<td style="font-size:24px; font-weight:600; text-align:left;">Локація</td>
+<td>
+<select id="locationWeight" style="width:100px; padding:9px; font-size:18px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</td>
+<td>
+<input id="locationReason" type="text" placeholder="Чому ви поставили таку оцінку?" style="width:430px; padding:12px; font-size:16px; border-radius:10px; border:1px solid #D0D7E2;">
+</td>
+</tr>
+
+<tr>
+<td style="font-size:24px; font-weight:600; text-align:left;">Стан</td>
+<td>
+<select id="conditionWeight" style="width:100px; padding:9px; font-size:18px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</td>
+<td>
+<input id="conditionReason" type="text" placeholder="Чому ви поставили таку оцінку?" style="width:430px; padding:12px; font-size:16px; border-radius:10px; border:1px solid #D0D7E2;">
+</td>
+</tr>
+
+<tr>
+<td style="font-size:24px; font-weight:600; text-align:left;">Інфраструктура</td>
+<td>
+<select id="infraWeight" style="width:100px; padding:9px; font-size:18px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</td>
+<td>
+<input id="infraReason" type="text" placeholder="Чому ви поставили таку оцінку?" style="width:430px; padding:12px; font-size:16px; border-radius:10px; border:1px solid #D0D7E2;">
+</td>
+</tr>
+
+<tr>
+<td style="font-size:24px; font-weight:600; text-align:left;">Комфорт</td>
+<td>
+<select id="comfortWeight" style="width:100px; padding:9px; font-size:18px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</td>
+<td>
+<input id="comfortReason" type="text" placeholder="Чому ви поставили таку оцінку?" style="width:430px; padding:12px; font-size:16px; border-radius:10px; border:1px solid #D0D7E2;">
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<div style="margin-top:40px;">
+
+<button onclick="backToScreen2()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen4()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 4 : ЦІНА -->
+<!-- ================================= -->
+<div id="screen4" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:32px; margin-bottom:12px;">
+Оцініть варіанти за критерієм
+<span style="color:#159EAA; font-weight:bold;">
+«Ціна»
+</span>
+</h1>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+">
+Важливість критерію: <span id="priceWeightText"></span> із 5
+</p>
+
+<button
+onclick="showApartmentInfo()"
+style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:10px 20px;
+font-size:18px;
+cursor:pointer;
+margin-bottom:25px;
+">
+ℹ Характеристики квартир
+</button>
+<div style="
+background:#F8F5EE;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="priceA" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="priceAReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F2F5F8;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="priceB" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="priceBReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F6F2FA;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="priceC" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="priceCReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen3()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen5()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+</div>
+<!-- ================================= -->
+<!-- SCREEN 5 : ЛОКАЦІЯ -->
+<!-- ================================= -->
+<div id="screen5" style="display:none; text-align:center; padding-top:10px;">
+<h1 style="font-size:32px; margin-bottom:12px;">
+Оцініть варіанти за критерієм
+<span style="color:#159EAA; font-weight:bold;">
+«Локація»
+</span>
+</h1>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+">
+Важливість критерію: <span id="locationWeightText"></span> із 5
+</p>
+
+<button
+onclick="showApartmentInfo()"
+style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:10px 20px;
+font-size:18px;
+cursor:pointer;
+margin-bottom:25px;
+">
+ℹ Характеристики квартир
+</button>
+<div style="
+background:#F8F5EE;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="locationA" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="locationAReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F2F5F8;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="locationB" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="locationBReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F6F2FA;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="locationC" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="locationCReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen4()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen6()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+</div>
+<!-- ================================= -->
+<!-- SCREEN 6 — СТАН -->
+<!-- ================================= -->
+<div id="screen6" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:32px; margin-bottom:12px;">
+Оцініть варіанти за критерієм
+<span style="color:#159EAA; font-weight:bold;">
+«Стан»
+</span>
+</h1>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+">
+Важливість критерію: <span id="conditionWeightText"></span> із 5
+</p>
+
+<button
+onclick="showApartmentInfo()"
+style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:10px 20px;
+font-size:18px;
+cursor:pointer;
+margin-bottom:25px;
+">
+ℹ Характеристики квартир
+</button>
+<div style="
+background:#F8F5EE;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="conditionA" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="conditionAReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F2F5F8;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="conditionB" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="conditionBReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F6F2FA;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="conditionC" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="conditionCReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen5()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen7()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+</div>
+<!-- ================================= -->
+<!-- SCREEN 7 — іНФРАСТРУКТУРА -->
+<!-- ================================= -->
+<div id="screen7" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:32px; margin-bottom:12px;">
+Оцініть варіанти за критерієм
+<span style="color:#159EAA; font-weight:bold;">
+«Інфраструктура»
+</span>
+</h1>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+">
+Важливість критерію: <span id="infraWeightText"></span> із 5
+</p>
+
+<button
+onclick="showApartmentInfo()"
+style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:10px 20px;
+font-size:18px;
+cursor:pointer;
+margin-bottom:25px;
+">
+ℹ Характеристики квартир
+</button>
+<div style="
+background:#F8F5EE;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="infraA" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="infraAReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F2F5F8;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="infraB" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="infraBReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F6F2FA;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="infraC" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="infraCReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen6()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen8()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+</div>
+<!-- ================================= -->
+<!-- SCREEN 8 — КОМФОРТ -->
+<!-- ================================= -->
+<div id="screen8" style="display:none; text-align:center; padding-top:10px;">
+<h1 style="font-size:32px; margin-bottom:12px;">
+Оцініть варіанти за критерієм
+<span style="color:#159EAA; font-weight:bold;">
+«Комфорт»
+</span>
+</h1>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:12px;
+">
+Важливість критерію: <span id="comfortWeightText"></span> із 5
+</p>
+
+<button
+onclick="showApartmentInfo()"
+style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:10px 20px;
+font-size:18px;
+cursor:pointer;
+margin-bottom:25px;
+">
+ℹ Характеристики квартир
+</button>
+<div style="
+background:#F8F5EE;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="comfortA" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="comfortAReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F2F5F8;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="comfortB" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="comfortBReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="
+background:#F6F2FA;
+border-radius:18px;
+padding:14px 20px;
+width:850px;
+margin:0 auto 14px auto;
+text-align:left;
+">
+
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+
+<div style="display:flex; align-items:center; gap:15px;">
+
+<select id="comfortC" style="
+width:110px;
+padding:8px;
+font-size:18px;
+border-radius:10px;
+">
+<option value="">Оберіть</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+
+<textarea
+id="comfortCReason"
+placeholder="Чому ви поставили таку оцінку?"
+rows="2"
+style="
+flex:1;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+">
+</textarea>
+
+</div>
+
+</div>
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen7()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen9()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+</div>
+<!-- ================================= -->
+<!-- SCREEN 9 — РЕЗУЛЬТАТ -->
+<!-- ================================= -->
+
+<div id="screen9" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:36px; margin-bottom:12px;">
+Результат оцінювання
+</h1>
+
+<p style="
+font-size:20px;
+line-height:1.4;
+margin-bottom:25px;
+">
+На основі ваших ваг критеріїв та оцінок варіантів<br>
+система розрахувала підсумковий результат.
+</p>
+
+<div style="
+display:flex;
+justify-content:center;
+gap:20px;
+margin-bottom:25px;
+">
+
+<div style="
+background:#F8F5EE;
+border-radius:20px;
+padding:20px;
+width:220px;
+">
+<h2 style="margin:0 0 10px 0;">Варіант А</h2>
+<p id="scoreA" style="font-size:30px; font-weight:bold; margin:0;">
+-
+</p>
+</div>
+
+<div style="
+background:#F2F5F8;
+border-radius:20px;
+padding:20px;
+width:220px;
+">
+<h2 style="margin:0 0 10px 0;">Варіант B</h2>
+<p id="scoreB" style="font-size:30px; font-weight:bold; margin:0;">
+-
+</p>
+</div>
+
+<div style="
+background:#F6F2FA;
+border-radius:20px;
+padding:20px;
+width:220px;
+">
+<h2 style="margin:0 0 10px 0;">Варіант C</h2>
+<p id="scoreC" style="font-size:30px; font-weight:bold; margin:0;">
+-
+</p>
+</div>
+
+</div>
+
+<div style="
+background:#F8FCFD;
+border:2px solid #39DEEA;
+border-radius:26px;
+padding:25px;
+width:650px;
+margin:0 auto 25px auto;
+">
+
+<p style="font-size:22px; margin:0 0 10px 0;">
+Рекомендований варіант
+</p>
+
+<h2 id="winnerText" style="
+font-size:38px;
+margin:0 0 10px 0;
+color:#159EAA;
+">
+-
+</h2>
+
+<p id="winnerScore" style="
+font-size:24px;
+font-weight:bold;
+margin:0;
+">
+-
+</p>
+
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen8()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen10()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+
+</div>
+
+<!-- ================================= -->
+<!-- SCREEN 10 — РЕФЛЕКСІЯ РЕЗУЛЬТАТУ -->
+<!-- ================================= -->
+
+<div id="screen10" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:28px; margin-bottom:10px;">
+Рефлексія результату
+</h1>
+
+<p style="font-size:19px; margin-bottom:18px;">
+Будь ласка, оцініть результат структурованого вибору.
+</p>
+
+<div style="
+background:#F8FCFD;
+border-radius:24px;
+padding:12px 28px;
+width:880px;
+margin:0 auto;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+text-align:left;
+font-size:17px;
+">
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 28px;">
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Чи співпав ваш інтуїтивний та структурований вибір?</b></p>
+<label><input type="radio" name="matchChoice" value="Так"> Так</label><br>
+<label><input type="radio" name="matchChoice" value="Ні"> Ні</label><br>
+<label><input type="radio" name="matchChoice" value="Частково"> Частково</label>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Чи погоджуєтесь ви з результатом структурованого оцінювання?</b></p>
+<label><input type="radio" name="agreeResult" value="Так"> Так</label><br>
+<label><input type="radio" name="agreeResult" value="Ні"> Ні</label><br>
+<label><input type="radio" name="agreeResult" value="Частково"> Частково</label>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Впевненість ДО оцінювання:</b></p>
+<select id="confidenceBefore" style="width:120px; padding:8px; font-size:17px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Впевненість ЗАРАЗ:</b></p>
+<select id="confidenceAfter" style="width:120px; padding:8px; font-size:17px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Складність вибору ДО структурування:</b></p>
+<select id="difficultyBefore" style="width:120px; padding:8px; font-size:17px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Складність вибору ЗАРАЗ:</b></p>
+<select id="difficultyAfter" style="width:120px; padding:8px; font-size:17px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+</div>
+
+<p style="margin-top:18px;"><b>Як ви пояснюєте зміни або незмінність вашої впевненості?</b></p>
+<textarea id="confidenceComment" rows="1" placeholder="Що вплинуло на зміну або збереження вашої впевненості?" style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+<p style="margin-top:8px; margin-bottom:4px;"><b>Додатковий коментар щодо вибору або результату:</b></p>
+<textarea id="resultComment" rows="1" placeholder="За бажанням додайте коментар щодо свого вибору або результату." style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+</div>
+
+<div style="text-align:center; margin-top:12px;">
+
+<button onclick="backToScreen9()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen11()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 11 — ОЦІНКА МЕХАНІЗМУ -->
+<!-- ================================= -->
+<div id="screen11" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:34px; margin-bottom:10px;">
+Оцінка механізму
+</h1>
+
+<p style="font-size:19px; margin-bottom:18px;">
+Будь ласка, оцініть запропонований механізм структурованого вибору.
+</p>
+
+<div style="
+background:#F8FCFD;
+border-radius:24px;
+padding:16px 28px;
+width:880px;
+margin:0 auto;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+text-align:left;
+font-size:17px;
+">
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;">
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Наскільки корисним був цей механізм?</b></p>
+<select id="mechanismUsefulness" style="width:120px; padding:6px; font-size:16px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Наскільки зрозумілим був процес?</b></p>
+<select id="mechanismClarity" style="width:120px; padding:6px; font-size:16px; border-radius:10px;">
+<option value="">Оберіть</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+</div>
+
+</div>
+
+<div style="margin-top:14px;">
+<p style="margin:6px 0 6px 0;"><b>Чи допоміг механізм краще усвідомити власні пріоритети під час вибору?</b></p>
+<label><input type="radio" name="prioritiesAwareness" value="Так"> Так</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="prioritiesAwareness" value="Ні"> Ні</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="prioritiesAwareness" value="Частково"> Частково</label>
+</div>
+
+<p style="margin:14px 0 6px 0;"><b>Що найбільше сподобалося?</b></p>
+<textarea id="likedMost" rows="2" placeholder="Що у механізмі здалося вам найбільш вдалим або корисним?" style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+<p style="margin:12px 0 6px 0;"><b>Що, на вашу думку, варто покращити?</b></p>
+<textarea id="improvementSuggestions" rows="2" placeholder="Що можна зробити зрозумілішим, зручнішим або кориснішим?" style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+<p style="margin:12px 0 6px 0;"><b>Додатковий коментар</b> <span style="color:#777;">(необов'язково)</span></p>
+<textarea id="mechanismComment" rows="2" placeholder="За бажанням додайте будь-який коментар щодо механізму." style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen10()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="goToScreen12()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Далі →
+</button>
+
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 12 — іНФОРМАЦІЯ ПРО УЧАСНИКА -->
+<!-- ================================= -->
+<div id="screen12" style="display:none; text-align:center; padding-top:10px;">
+
+<h1 style="font-size:34px; margin-bottom:10px;">
+Інформація про учасника
+</h1>
+
+<p style="font-size:19px; margin-bottom:18px;">
+Будь ласка, надайте коротку інформацію про себе.
+</p>
+
+<div style="
+background:#FDFBF8;
+border-radius:24px;
+padding:16px 28px;
+width:880px;
+margin:0 auto;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+text-align:left;
+font-size:17px;
+">
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;">
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Ім'я та прізвище</b> <span style="color:#777;">(необов'язково)</span></p>
+<input id="participantName" type="text" placeholder="Наприклад: Іваненко Олена" style="
+width:100%;
+padding:10px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+">
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Статус</b></p>
+<select id="participantStatus" style="
+width:100%;
+padding:10px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+">
+<option value="">Оберіть</option>
+<option>Студент</option>
+<option>Випускник</option>
+<option>Викладач</option>
+<option>Науковець</option>
+<option>Інше</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Курс / освітній статус</b> <span style="color:#777;">(за наявності)</span></p>
+<select id="participantCourse" style="
+width:100%;
+padding:10px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+">
+<option value="">Оберіть</option>
+<option>1 курс бакалаврату</option>
+<option>2 курс бакалаврату</option>
+<option>3 курс бакалаврату</option>
+<option>4 курс бакалаврату</option>
+<option>1 курс магістратури</option>
+<option>2 курс магістратури</option>
+<option>Випускник / випускниця</option>
+</select>
+</div>
+
+<div>
+<p style="margin:6px 0 6px 0;"><b>Спеціальність / сфера діяльності</b></p>
+<input id="participantField" type="text" placeholder="Наприклад: комп'ютерні науки, філологія, освіта, ІТ" style="
+width:100%;
+padding:10px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+">
+</div>
+
+</div>
+
+<div style="margin-top:16px;">
+<p style="margin:6px 0 6px 0;"><b>Чи використовували ви раніше подібні методи структурованого вибору?</b></p>
+<label><input type="radio" name="previousMethods" value="Так"> Так</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="previousMethods" value="Ні"> Ні</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="previousMethods" value="Не впевнений(а)"> Не впевнений(а)</label>
+</div>
+
+<div style="margin-top:16px;">
+<p style="margin:6px 0 6px 0;"><b>Наскільки часто вам доводиться приймати складні рішення?</b></p>
+<label><input type="radio" name="decisionFrequency" value="Рідко"> Рідко</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="decisionFrequency" value="Іноді"> Іноді</label>
+&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="decisionFrequency" value="Часто"> Часто</label>
+</div>
+
+<p style="margin:16px 0 6px 0;"><b>Додатковий коментар</b> <span style="color:#777;">(необов'язково)</span></p>
+<textarea id="participantComment" rows="2" placeholder="За бажанням додайте будь-який коментар." style="
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #D0D7E2;
+box-sizing:border-box;
+"></textarea>
+
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+
+<button onclick="backToScreen11()" style="
+background:white;
+border:2px solid #39DEEA;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+margin-right:30px;
+cursor:pointer;
+">
+← Назад
+</button>
+
+<button onclick="finishTest()" style="
+background:#39DEEA;
+border:none;
+border-radius:12px;
+padding:15px 40px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+">
+Завершити
+</button>
+
+</div>
+
+</div>
+<!-- ================================= -->
+<!-- SCREEN 13 — ЗАВЕРШЕННЯ -->
+<!-- ================================= -->
+<div id="screen13" style="display:none; text-align:center; padding-top:80px;">
+
+<div style="
+background:#F8FCFD;
+border:2px solid #39DEEA;
+border-radius:28px;
+padding:45px 60px;
+width:650px;
+margin:0 auto;
+box-shadow:0 2px 12px rgba(0,0,0,0.06);
+">
+
+<h1 style="
+font-size:40px;
+margin:0 0 18px 0;
+color:#159EAA;
+">
+Дякуємо за участь!
+</h1>
+
+<p style="
+font-size:22px;
+line-height:1.5;
+margin-bottom:18px;
+">
+Ваші відповіді успішно збережено.
+</p>
+
+<p style="
+font-size:19px;
+line-height:1.5;
+margin-bottom:32px;
+">
+Дякуємо за участь у тестуванні механізму структурованого вибору.
+</p>
+
+</div>
+
+</div>
+<script>
+const testStartTime = Date.now();
+let validationOn = true;
+let selectedOption = "";
+
+let finalScoreA = 0;
+let finalScoreB = 0;
+let finalScoreC = 0;
+let finalWinner = "";
+
+// =================================
+// SCREEN 0 — НАЗВА
+// =================================
+function goToScreen1() {
+    document.getElementById("screen0").style.display = "none";
+    document.getElementById("screen1").style.display = "block";
+}
+// =================================
+// SCREEN 1 — ВАРІАНТИ
+// =================================
+
+function selectCard(card, option) {
+    selectedOption = option;
+
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(function(item) {
+        item.style.border = "2px solid gray";
+        item.style.transform = "none";
+    });
+
+    card.style.border = "4px solid #4285F4";
+    card.style.transform = "scale(1.03)";
+
+    console.log("Обрано:", selectedOption);
+}
+function goNext() {
+
+    if (selectedOption == "") {
+        alert("Спочатку оберіть варіант");
+        return;
+    }
+
+    document.getElementById("screen1").style.display = "none";
+
+    document.getElementById("screen2").style.display = "block";
+
+    let cardText = "";
+let bgColor = "";
+
+if (selectedOption == "A") {
+    cardText = `
+        <h2 style="margin:0 0 12px 0;">Варіант А</h2>
+<p style="margin:0;">
+25 м² • Голосіївський р-н • 11 000 грн
+</p>
+
+<p style="margin:8px 0 0 0;">
+15 хв транспортом до метро • сучасний ремонт • будинок 2010-х рр.
+</p>
+`;
+        bgColor = "#F8F5EE";
+}
+
+if (selectedOption == "B") {
+    cardText = `
+       <h2 style="margin:0 0 12px 0;">Варіант B</h2>
+
+<p style="margin:0;">
+35 м² • Голосіївський р-н • 11 000 грн
+</p>
+
+<p style="margin:8px 0 0 0;">
+10 хв транспортом до метро • простий ремонт • будинок 2020-х рр.
+</p>
+`;
+    bgColor = "#F2F5F8";
+}
+
+if (selectedOption == "C") {
+    cardText = `
+        <h2 style="margin:0 0 12px 0;">Варіант C</h2>
+<p style="margin:0;">
+39 м² • Голосіївський р-н • 13 000 грн
+</p>
+
+<p style="margin:8px 0 0 0;">
+20 хв пішки до метро • простий ремонт • будинок 2000-х рр.
+</p>
+`;
+      
+    bgColor = "#F6F2FA";
+}
+
+document.getElementById("chosenCard").innerHTML = cardText;
+document.getElementById("chosenCard").style.backgroundColor = bgColor;
+}
+// =================================
+// SCREEN 2 — ІНТУЇТИВНИЙ ВИБІР
+// =================================
+function goBack() {
+    document.getElementById("screen2").style.display = "none";
+    document.getElementById("screen1").style.display = "block";
+}
+function goToScreen3() {
+    if (validationOn) {
+        if (document.getElementById("intuitiveChoiceComment").value.trim() === "") {
+            alert("Будь ласка, коротко поясніть, чому ви обрали цей варіант.");
+            return;
+        }
+    }
+
+    document.getElementById("screen2").style.display = "none";
+    document.getElementById("screen3").style.display = "block";
+}
+// =================================
+// SCREEN 3 — ВАГИ КРИТЕРІЇВ
+// =================================
+
+function backToScreen2() {
+    document.getElementById("screen3").style.display = "none";
+    document.getElementById("screen2").style.display = "block";
+}
+
+function goToScreen4() {
+    if (
+        document.getElementById("priceWeight").value === "" ||
+        document.getElementById("locationWeight").value === "" ||
+        document.getElementById("conditionWeight").value === "" ||
+        document.getElementById("infraWeight").value === "" ||
+        document.getElementById("comfortWeight").value === "" ||
+        document.getElementById("priceReason").value.trim() === "" ||
+        document.getElementById("locationReason").value.trim() === "" ||
+        document.getElementById("conditionReason").value.trim() === "" ||
+        document.getElementById("infraReason").value.trim() === "" ||
+        document.getElementById("comfortReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, заповніть усі ваги критеріїв та пояснення.");
+        return;
+    }
+
+    document.getElementById("screen3").style.display = "none";
+
+    document.getElementById("priceWeightText").textContent =
+        getNumber("priceWeight");
+
+    document.getElementById("screen4").style.display = "block";
+}
+// =================================
+// SCREEN 4 — ЦІНА
+// =================================
+function backToScreen3() {
+    document.getElementById("screen4").style.display = "none";
+    document.getElementById("screen3").style.display = "block";
+}
+
+function goToScreen5() {
+    if (
+        document.getElementById("priceA").value === "" ||
+        document.getElementById("priceB").value === "" ||
+        document.getElementById("priceC").value === "" ||
+        document.getElementById("priceAReason").value.trim() === "" ||
+        document.getElementById("priceBReason").value.trim() === "" ||
+        document.getElementById("priceCReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, оцініть усі варіанти за критерієм «Ціна» та коротко поясніть кожну оцінку.");
+        return;
+    }
+
+    document.getElementById("screen4").style.display = "none";
+
+    document.getElementById("locationWeightText").textContent =
+        getNumber("locationWeight");
+
+    document.getElementById("screen5").style.display = "block";
+}
+// =================================
+// SCREEN 5 — ЛОКАЦІЯ
+// =================================
+function backToScreen4() {
+    document.getElementById("screen5").style.display = "none";
+    document.getElementById("screen4").style.display = "block";
+}
+function goToScreen6() {
+    if (
+        document.getElementById("locationA").value === "" ||
+        document.getElementById("locationB").value === "" ||
+        document.getElementById("locationC").value === "" ||
+        document.getElementById("locationAReason").value.trim() === "" ||
+        document.getElementById("locationBReason").value.trim() === "" ||
+        document.getElementById("locationCReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, оцініть усі варіанти за критерієм «Локація» та коротко поясніть кожну оцінку.");
+        return;
+    }
+
+    document.getElementById("screen5").style.display = "none";
+
+    document.getElementById("conditionWeightText").textContent =
+        getNumber("conditionWeight");
+
+    document.getElementById("screen6").style.display = "block";
+}
+
+// =================================
+// SCREEN 6 — СТАН
+// =================================
+function backToScreen5() {
+    document.getElementById("screen6").style.display = "none";
+    document.getElementById("screen5").style.display = "block";
+}
+
+function goToScreen7() {
+    if (
+        document.getElementById("conditionA").value === "" ||
+        document.getElementById("conditionB").value === "" ||
+        document.getElementById("conditionC").value === "" ||
+        document.getElementById("conditionAReason").value.trim() === "" ||
+        document.getElementById("conditionBReason").value.trim() === "" ||
+        document.getElementById("conditionCReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, оцініть усі варіанти за критерієм «Стан» та коротко поясніть кожну оцінку.");
+        return;
+    }
+
+    document.getElementById("screen6").style.display = "none";
+
+    document.getElementById("infraWeightText").textContent =
+        getNumber("infraWeight");
+
+    document.getElementById("screen7").style.display = "block";
+}
+// =================================
+// SCREEN 7 — ІНФРАСТРУКТУРА
+// =================================
+function backToScreen6() {
+    document.getElementById("screen7").style.display = "none";
+    document.getElementById("screen6").style.display = "block";
+}
+
+function goToScreen8() {
+    if (
+        document.getElementById("infraA").value === "" ||
+        document.getElementById("infraB").value === "" ||
+        document.getElementById("infraC").value === "" ||
+        document.getElementById("infraAReason").value.trim() === "" ||
+        document.getElementById("infraBReason").value.trim() === "" ||
+        document.getElementById("infraCReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, оцініть усі варіанти за критерієм «Інфраструктура» та коротко поясніть кожну оцінку.");
+        return;
+    }
+
+    document.getElementById("screen7").style.display = "none";
+
+    document.getElementById("comfortWeightText").textContent =
+        getNumber("comfortWeight");
+
+    document.getElementById("screen8").style.display = "block";
+}
+// =================================
+// SCREEN 8 — Комфорт
+// =================================
+function backToScreen7() {
+    document.getElementById("screen8").style.display = "none";
+    document.getElementById("screen7").style.display = "block";
+}
+
+function goToScreen9() {
+    if (
+        document.getElementById("comfortA").value === "" ||
+        document.getElementById("comfortB").value === "" ||
+        document.getElementById("comfortC").value === "" ||
+        document.getElementById("comfortAReason").value.trim() === "" ||
+        document.getElementById("comfortBReason").value.trim() === "" ||
+        document.getElementById("comfortCReason").value.trim() === ""
+    ) {
+        alert("Будь ласка, оцініть усі варіанти за критерієм «Комфорт» та коротко поясніть кожну оцінку.");
+        return;
+    }
+
+    calculateResults();
+
+    document.getElementById("screen8").style.display = "none";
+    document.getElementById("screen9").style.display = "block";
+}
+function getNumber(id) {
+    return Number(document.getElementById(id).value);
+}
+function getRadioValue(name) {
+    let selected = document.querySelector('input[name="' + name + '"]:checked');
+
+    if (selected) {
+        return selected.value;
+    } else {
+        return "";
+    }
+}
+function collectTestData() {
+    const testData = {
+
+        durationSeconds: Math.round((Date.now() - testStartTime) / 1000),
+
+        choice: {
+    intuitiveChoice: selectedOption,
+    intuitiveChoiceComment:
+        document.getElementById("intuitiveChoiceComment").value
+},
+
+        weights: {
+            price: getNumber("priceWeight"),
+            location: getNumber("locationWeight"),
+            condition: getNumber("conditionWeight"),
+            infra: getNumber("infraWeight"),
+            comfort: getNumber("comfortWeight")
+        },
+
+        ratings: {
+            A: {
+                price: getNumber("priceA"),
+                location: getNumber("locationA"),
+                condition: getNumber("conditionA"),
+                infra: getNumber("infraA"),
+                comfort: getNumber("comfortA")
+            },
+
+            B: {
+                price: getNumber("priceB"),
+                location: getNumber("locationB"),
+                condition: getNumber("conditionB"),
+                infra: getNumber("infraB"),
+                comfort: getNumber("comfortB")
+            },
+
+            C: {
+                price: getNumber("priceC"),
+                location: getNumber("locationC"),
+                condition: getNumber("conditionC"),
+                infra: getNumber("infraC"),
+                comfort: getNumber("comfortC")
+            }
+        },
+        
+            results: {
+            scoreA: finalScoreA,
+            scoreB: finalScoreB,
+            scoreC: finalScoreC,
+            winner: finalWinner
+        },
+
+        reflection: {
+            matchChoice: getRadioValue("matchChoice"),
+            agreeResult: getRadioValue("agreeResult"),
+            confidenceBefore: getNumber("confidenceBefore"),
+            confidenceAfter: getNumber("confidenceAfter"),
+            difficultyBefore: getNumber("difficultyBefore"),
+            difficultyAfter: getNumber("difficultyAfter"),
+            confidenceComment: document.getElementById("confidenceComment").value,
+            resultComment: document.getElementById("resultComment").value
+        },
+
+        mechanism: {
+            usefulness: getNumber("mechanismUsefulness"),
+            clarity: getNumber("mechanismClarity"),
+            prioritiesAwareness: getRadioValue("prioritiesAwareness"),
+            likedMost: document.getElementById("likedMost").value,
+            improvementSuggestions: document.getElementById("improvementSuggestions").value,
+            mechanismComment: document.getElementById("mechanismComment").value
+        },
+
+        participant: {
+            name: document.getElementById("participantName").value,
+            status: document.getElementById("participantStatus").value,
+            course: document.getElementById("participantCourse").value,
+            field: document.getElementById("participantField").value,
+            previousMethods: getRadioValue("previousMethods"),
+            decisionFrequency: getRadioValue("decisionFrequency"),
+            participantComment: document.getElementById("participantComment").value
+        }
+    };
+
+    console.log(testData);
+    return testData;
+}
+
+function sendDataToGoogleSheets(testData) {
+
+    fetch("https://script.google.com/macros/s/AKfycby0f-LxnEMpXH62t-NFdvRmXoPjHW_2PleImygjCOIJwM-jbaMv2NFToADkg7G48H0BiA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(testData)
+    });
+
+}
+
+function calculateResults() {
+    let priceW = getNumber("priceWeight");
+    let locationW = getNumber("locationWeight");
+    let conditionW = getNumber("conditionWeight");
+    let infraW = getNumber("infraWeight");
+    let comfortW = getNumber("comfortWeight");
+
+    let scoreA =
+        priceW * getNumber("priceA") +
+        locationW * getNumber("locationA") +
+        conditionW * getNumber("conditionA") +
+        infraW * getNumber("infraA") +
+        comfortW * getNumber("comfortA");
+
+    let scoreB =
+        priceW * getNumber("priceB") +
+        locationW * getNumber("locationB") +
+        conditionW * getNumber("conditionB") +
+        infraW * getNumber("infraB") +
+        comfortW * getNumber("comfortB");
+
+    let scoreC =
+        priceW * getNumber("priceC") +
+        locationW * getNumber("locationC") +
+        conditionW * getNumber("conditionC") +
+        infraW * getNumber("infraC") +
+        comfortW * getNumber("comfortC");
+
+    document.getElementById("scoreA").innerText = scoreA + " балів";
+    document.getElementById("scoreB").innerText = scoreB + " балів";
+    document.getElementById("scoreC").innerText = scoreC + " балів";
+
+    let winner = "Варіант А";
+    let winnerScore = scoreA;
+
+    if (scoreB > winnerScore) {
+        winner = "Варіант B";
+        winnerScore = scoreB;
+    }
+
+    if (scoreC > winnerScore) {
+        winner = "Варіант C";
+        winnerScore = scoreC;
+    }
+
+    document.getElementById("winnerText").innerText = "🏆 " + winner;
+    document.getElementById("winnerScore").innerText = winnerScore + " балів";
+    finalScoreA = scoreA;
+    finalScoreB = scoreB;
+    finalScoreC = scoreC;
+    finalWinner = winner;
+}
+// =================================
+// SCREEN 9 — РЕЗУЛЬТАТ
+// =================================
+
+function backToScreen8() {
+    document.getElementById("screen9").style.display = "none";
+    document.getElementById("screen8").style.display = "block";
+}
+
+function goToScreen10() {
+    document.getElementById("screen9").style.display = "none";
+    document.getElementById("screen10").style.display = "block";
+}
+// =================================
+// SCREEN 10 — РЕФЛЕКСІЯ РЕЗУЛЬТАТУ
+// =================================
+
+function backToScreen9() {
+    document.getElementById("screen10").style.display = "none";
+    document.getElementById("screen9").style.display = "block";
+}
+
+function goToScreen11() {
+
+    if (
+        getRadioValue("matchChoice") === "" ||
+        getRadioValue("agreeResult") === "" ||
+
+        document.getElementById("confidenceBefore").value === "" ||
+        document.getElementById("confidenceAfter").value === "" ||
+
+        document.getElementById("difficultyBefore").value === "" ||
+        document.getElementById("difficultyAfter").value === "" ||
+
+        document.getElementById("confidenceComment").value.trim() === ""
+    ) {
+        alert("Будь ласка, заповніть усі обов'язкові поля.");
+        return;
+    }
+
+    document.getElementById("screen10").style.display = "none";
+    document.getElementById("screen11").style.display = "block";
+}
+// =================================
+// SCREEN 11 — ОЦІНКА МЕХАНІЗМУ
+// =================================
+
+function backToScreen10() {
+    document.getElementById("screen11").style.display = "none";
+    document.getElementById("screen10").style.display = "block";
+}
+
+function goToScreen12() {
+
+    if (
+        document.getElementById("mechanismUsefulness").value === "" ||
+        document.getElementById("mechanismClarity").value === "" ||
+        getRadioValue("prioritiesAwareness") === "" ||
+        document.getElementById("likedMost").value.trim() === ""
+    ) {
+        alert("Будь ласка, заповніть усі обов'язкові поля.");
+        return;
+    }
+
+    document.getElementById("screen11").style.display = "none";
+    document.getElementById("screen12").style.display = "block";
+}
+// =================================
+// SCREEN 12 — ІНФОРМАЦІЯ ПРО УЧАСНИКА
+// =================================
+
+function backToScreen11() {
+    document.getElementById("screen12").style.display = "none";
+    document.getElementById("screen11").style.display = "block";
+}
+
+function showApartmentInfo() {
+
+alert(`
+Варіант A:
+25 м² • 11 000 грн • 15 хв транспортом до метро • ремонт сучасний • будинок 2010-х • поверх 1 з 16 • окрема кухня і ванна • інфраструктура: магазини, аптека, парк, транспорт
+
+Варіант B:
+35 м² • 11 000 грн • 10 хв транспортом до метро • простий ремонт • будинок 2020-х • поверх 1 з 3 • автономність (електрика, інтернет) • магазини, лікарня, банк, ТРЦ
+
+Варіант C:
+39 м² • 13 000 грн • 20 хв пішки до метро • новий ремонт • будинок 2000-х • поверх 3 з 9 • світла квартира з балконом • магазини, аптека, парк, кафе, фітнес-центр, басейн
+`);
+
+}
+
+function finishTest() {
+    try {
+
+        if (
+            document.getElementById("participantStatus").value === "" ||
+            document.getElementById("participantCourse").value === "" ||
+            document.getElementById("participantField").value.trim() === "" ||
+            getRadioValue("previousMethods") === "" ||
+            getRadioValue("decisionFrequency") === ""
+        ) {
+            alert("Будь ласка, заповніть усі обов'язкові поля.");
+            return;
+        }
+
+        const testData = collectTestData();
+        sendDataToGoogleSheets(testData);
+
+        document.getElementById("screen12").style.display = "none";
+        document.getElementById("screen13").style.display = "block";
+
+    } catch (error) {
+        alert("Помилка у collectTestData: " + error.message);
+    }
+}
+// =================================
+// SCREEN 13 — ЗАВЕРШЕННЯ
+// =================================
+
+
+</script>
+</body>
+</html>
